@@ -55,7 +55,13 @@ function generateTweet(name, birthday) {
     ':user:は:lived:日生きた。人生あと:rest:日。明日から本気出す'
   ];
   var tmpl = tmpls[irand(tmpls.length - 1)];
-  if (restdays <= 0) { tmpl = ':user:は:lived:日生きた。お前はもう死んでいる'; }
+  if (livedays < 0) {
+    tmpl = ':user:は:lived:日生きた．こいつ、未来に生きてやがる……ッ!!';
+  } else if (livedays == 0) {
+    tmpl = ':user:は今まさに生まれた。Hello, World!';
+  } else if (restdays <= 0) {
+    tmpl = ':user:は:lived:日生きた。お前はもう死んでいる';
+  }
   return tmpl.replace(':lived:', livedays)
     .replace(':rest:', restdays)
     .replace(':user:', '@' + name);
