@@ -1,2 +1,8 @@
-<h1>Users#index</h1>
-<p>Find me in app/views/users/index.html.erb</p>
+<h1>意識低い</h1>
+<% if session[:touch] == 'touch' %>
+<% render :partial => 'authed' %>
+
+
+<% else %>
+<a href="./login">意識低い宣言</a>
+<% end %>
