@@ -1,22 +1,17 @@
 class UsersController < ApplicationController
-  def index
-    @user = User.all.find()
-    if session['user_id'] #cookieにしてね -> 意識低いのでやめました。
-      #@user = User.find.(session['user_id'])
-      session['status'] = 1
-      
-      
+  def index    
+    user = User.find(session['user_id'])
+    
+    if user #cookieにしてね -> 意識低いのでやめました。
+      @user = user
     else
-      #cookieないよー
+      session['user_id'] = nil
     end
-    require('pp')
-    pp @user
   end
 
   def login
     callback_url = 'http://localhost:3000/callback'
     consumer = oauth_consumer
-
 
     request_token = consumer.get_request_token :oauth_callback => callback_url
 
@@ -53,7 +48,8 @@ class UsersController < ApplicationController
 
     if user #DBにいる
       session[:touch] = 'touch'
-      #session['user_id'] = user.user_id
+      redirect_to :action => 'index'
+      session['user_id'] = user.id
     else #後新規一名様。
       user = User.create(
                          :screen_name => @profile.screen_name,
@@ -61,13 +57,10 @@ class UsersController < ApplicationController
                          :access_token => access_token.token,
                          :access_token_secret => access_token.secret
                          )
-      session[:touch] = 'first'
-      
-    end
-
-    session[:user_id] = user.id
+      session[:user_id] = user.id
     
     redirect_to :action => 'new'
+    end
   end
 
   def new

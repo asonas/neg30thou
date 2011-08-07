@@ -1,8 +1,6 @@
 <h1>意識低い</h1>
-<% if session[:touch] == 'touch' %>
-<% render :partial => 'authed' %>
-
-
+<% if @user %>
+認証出来てるしあとは、<b>道踏み外してマイウェイつくっていけよ皆で</b>
 <% else %>
 <a href="./login">意識低い宣言</a>
 <% end %>
