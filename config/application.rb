@@ -32,7 +32,7 @@ module Yamada
 
     # JavaScript files you want as :defaults (application.js is always included).
     # config.action_view.javascript_expansions[:defaults] = %w(jquery rails)
-
+    Rails.application.config.base = YAML.load_file(File.join(Rails.root, "config", "base.yml" ))
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
 
