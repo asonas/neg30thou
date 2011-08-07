@@ -103,9 +103,10 @@ class UsersController < ApplicationController
   
   private
   def oauth_consumer
+    config = Rails.application.config.base
     OAuth::Consumer.new(
-      'iV6SOrlzW44nHPYEHXBdvw',
-      'sjWZ8PYG6ZcatERrjxE97dDGuK9IloDXJgnTezzXc',
+      config.twitter.consumer_key,
+      config.twitter.consumer_secret,
       :site => 'http://twitter.com')
   end
 
