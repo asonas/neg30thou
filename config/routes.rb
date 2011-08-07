@@ -3,13 +3,10 @@ Yamada::Application.routes.draw do
   root :to => 'users#index'
   
   resources :users
-  match 'login', :to => 'users#login'
-  match 'callback', :to => 'users#callback'
-    
-  
-  #get "users/index"
-  #get "users/login"
-  #get "users/callbaxk"
+    match 'login', :to => 'users#login'
+    match 'callback', :to => 'users#callback'
+    match 'create', :to => 'users#create'
+    match 'new', :to => 'users#new'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

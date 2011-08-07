@@ -1,14 +1,2 @@
-<h1>意識低い認証完了</h1>
-<p>あとは何でもしてくれるスーパー意識高いサーバさんが貴方の意識の低さを証明しつづけてくれます！！！</p>
-<p>最後に誕生日をいれやがってください。</p>
-
-<%= form_for @user do |form| %>
-<ul>
-<li>
-<%= form.label :due_date, "誕生日入れてね" %>
-<%= form.date_select :due_date, :use_month_numbers => true,
-      :order => [ :year, :month, :day ]%>
-</li>
-<li><%= form.submit "送信" %></li>
-</ul>
-<% end %>
+<h1>Users#callback</h1>
+<p>Find me in app/views/users/callback.html.erb</p>

@@ -1,0 +1,21 @@
+<div id="authed">
+<p>意識低下承認！！！！！！！</p>
+<p>あとは何でもしてくれるスーパー意識高いサーバさんが貴方の意識の低さを証明しつづけてくれます！！！</p>
+<p>最後に誕生日をいれやがってください！！！</p>
+<ul>
+
+<%= form_for @user, :action => 'create' do |form| %>
+<ul>
+<li>
+<%= form.label :birthday, "誕生日" %>
+<%= form.date_select :birthday, 
+      :use_month_numbers => true,
+      :order => [ :year, :month, :day ],
+      :start_year => Time.current.year - 99,
+      :end_year => Time.current.year + 99 %>
+</li>
+<li><%= form.submit "送信" %></li>
+</ul>
+<% end %>
+</div>
+

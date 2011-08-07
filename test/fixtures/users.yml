@@ -3,11 +3,13 @@
 one:
   user_id: 1
   access_token: MyText
-  access_token_secret: MyText
-  screen_name: MyText
+  access_token_secret: MyString
+  screen_name: MyString
+  birthday: MyString
 
 two:
   user_id: 1
   access_token: MyText
-  access_token_secret: MyText
-  screen_name: MyText
+  access_token_secret: MyString
+  screen_name: MyString
+  birthday: MyString
