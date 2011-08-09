@@ -1,7 +1,8 @@
+# -*- coding: utf-8 -*-
 class UsersController < ApplicationController
-  def index    
+  def index
     user = User.find(session['user_id'])
-    
+
     if user #cookieにしてね -> 意識低いのでやめました。
       @user = user
     else
@@ -10,10 +11,12 @@ class UsersController < ApplicationController
   end
 
   def login
-    callback_url = 'http://localhost:3000/callback'
     consumer = oauth_consumer
 
-    request_token = consumer.get_request_token :oauth_callback => callback_url
+    #callback_url = 'http://localhost:3000/callback'
+    #request_token = consumer.get_request_token :oauth_callback => callback_url
+
+    request_token = consumer.get_request_token
 
     session['request_token'] = request_token.token
     session['request_secret'] = request_token.secret
@@ -48,8 +51,8 @@ class UsersController < ApplicationController
 
     if user #DBにいる
       session[:touch] = 'touch'
-      redirect_to :action => 'index'
       session['user_id'] = user.id
+      redirect_to :action => 'index'
     else #後新規一名様。
       user = User.create(
                          :screen_name => @profile.screen_name,
@@ -58,7 +61,7 @@ class UsersController < ApplicationController
                          :access_token_secret => access_token.secret
                          )
       session[:user_id] = user.id
-    
+
     redirect_to :action => 'new'
     end
   end
@@ -66,14 +69,14 @@ class UsersController < ApplicationController
   def new
     @user = User.find(session[:user_id])
   end
-  
+
   def update
     data = params[:user]
-    
+
     year = data['birthday(1i)']
     month = data['birthday(2i)']
     day = data['birthday(3i)']
-    
+
     if /[1-9]/ =~ month
       month = '0' + month
     end
@@ -83,7 +86,7 @@ class UsersController < ApplicationController
     end
 
     birthday = year + '-' + month + '-' + day
-    
+
     user = User.find(session['user_id'])
     if user
       user.birthday = birthday
@@ -92,8 +95,7 @@ class UsersController < ApplicationController
     end
     redirect_to :action => 'index'
   end
-    
-  
+
   private
   def oauth_consumer
     config = Rails.application.config
@@ -102,6 +104,5 @@ class UsersController < ApplicationController
       config.base['twitter']['consumer_secret'],
       :site => 'http://twitter.com')
   end
-
 
 end
