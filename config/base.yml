@@ -1,3 +1,4 @@
 twitter:
   consumer_key: ""
   consumer_secret: ""
+  callback_url: "http://localhost:3000/callback"
