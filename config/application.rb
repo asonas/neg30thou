@@ -8,6 +8,8 @@ Bundler.require(:default, Rails.env) if defined?(Bundler)
 
 module Yamada
   class Application < Rails::Application
+    Rails.application.config.base = YAML.load_file(File.join(Rails.root, "config", "base.yml" ))
+    
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
@@ -32,7 +34,6 @@ module Yamada
 
     # JavaScript files you want as :defaults (application.js is always included).
     # config.action_view.javascript_expansions[:defaults] = %w(jquery rails)
-    Rails.application.config.base = YAML.load_file(File.join(Rails.root, "config", "base.yml" ))
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"
 
