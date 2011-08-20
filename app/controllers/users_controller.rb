@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 class UsersController < ApplicationController
   def index
-    user = User.find(session['user_id'])
-
+    if !session
+      user = User.find(session['user_id'])
+    end
     if user #cookieにしてね -> 意識低いのでやめました。
       @user = user
     else
@@ -98,10 +99,10 @@ class UsersController < ApplicationController
 
   private
   def oauth_consumer
-    config = Rails.application.config
+    #config = Rails.application.config
     OAuth::Consumer.new(
-      config.base['twitter']['consumer_key'],
-      config.base['twitter']['consumer_secret'],
+      Rails.application.config.base['twitter']['consumer_key'],
+      Rails.application.config.base['twitter']['consumer_secret'],
       :site => 'http://twitter.com')
   end
 
